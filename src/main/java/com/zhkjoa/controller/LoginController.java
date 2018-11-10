@@ -14,22 +14,16 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     private UserService userService;
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity zhLogin(@RequestBody zhuser zhu) {
-
-        System.out.println(zhu.getZhUsername()+zhu.getZhPassword());
-        return new ResponseEntity(HttpStatus.OK);
-
-    }
-    /*@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity zhLogin(HttpServletRequest request, @RequestParam(value = "username", required = false) String username, @RequestParam(value = "password", required = false) String password) {
+    public ResponseEntity zhLogin(HttpServletRequest request, @RequestBody zhuser zhu) {
         String truePwd=null;
         zhuser zhuser1=new zhuser();
-        if(userService.searchByUsername(username)!=null){
-            zhuser1 = userService.searchByUsername(username);
+        if(userService.searchByUsername(zhu.getZhUsername())!=null){
+            zhuser1 = userService.searchByUsername(zhu.getZhUsername());
             truePwd = zhuser1.getZhPassword();
         }
-        if (truePwd != null && truePwd.equals(password)) {
+        if (truePwd != null && truePwd.equals(zhu.getZhPassword())) {
             HttpSession session = request.getSession();
             session.setAttribute("zhname", zhuser1.getZhName());
             session.setAttribute("zhstate", zhuser1.getZhState());
@@ -39,7 +33,7 @@ public class LoginController {
         } else {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-    }*/
+    }
 
     @RequestMapping(value = "/loginstate", method = RequestMethod.POST)
     public ResponseEntity zhLoginstate(HttpServletRequest request) {

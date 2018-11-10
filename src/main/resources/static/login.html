@@ -50,13 +50,11 @@
             var form1=$("#zhform").serializeObject();
             var username=$("#zhusername").val();
             var password=$("#zhpassword").val();
-            console.log(JSON.stringify(form1))
             $.ajax({
                 type: "POST",
                 url: "/login",
                 data:JSON.stringify(form1),
                 contentType:"application/json",
-                    // {username:username,password:password},
                 dataType: "json",
                 statusCode:{
                     200:function () {
